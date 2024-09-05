@@ -30,13 +30,8 @@ jobs:
           ./build.sh marble
       - name: "Zip output"
         run: zip -r9 "marble-kernel.zip" kernel_platform/device/xiaomi/marble-kernel/*
-      - name: Generate release tag
-        id: tag
-        run: echo "::set-output name=release_tag::AOSPA_KSU_GKI_$(date +"%Y.%m.%d")"
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag.outputs.release_tag }}
+          tag_name: "AOSPA_KSU_GKI_$(date +'%Y.%m.%d')"
           files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/marble-kernel.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
