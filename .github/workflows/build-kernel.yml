@@ -31,7 +31,9 @@ jobs:
           cd kernel_platform/xiaomi/sm8450
           ./build.sh marble
       - name: "Zip output"
-        run: zip -r9 "marble-kernel.zip" kernel_platform/device/xiaomi/marble-kernel/*
+        run: |
+          cd kernel_platform/device/xiaomi/marble-kernel
+          zip -r9 "../../../../marble-kernel.zip" *
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
