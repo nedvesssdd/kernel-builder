@@ -7,8 +7,14 @@ jobs:
     steps:
       - name: "Setup build environment"
         run: curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh | bash -
-      - name: "Clone repo, sync, and build"
-        run: repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1 && repo sync && cd kernel_platform && mkdir -p device/xiaomi/marble-kernel && cd xiaomi/sm8450 && ./build.sh marble && cd ../../device/xiaomi/marble-kernel && zip -r9 "../marble-kernel.zip" *
+      - name: "Clone repo, and sync"
+        run: repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1 && repo sync && cd kernel_platform && mkdir -p device/xiaomi/marble-kernel && cd xiaomi/sm8450
+      #- name: "Include KSU"
+      #  run: curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+      - name: "Build kernel"
+        run: ./build.sh marble
+      - name: "Zip output"
+        run: cd ../../device/xiaomi/marble-kernel && zip -r9 "../marble-kernel.zip" *
       - name: Generate release tag
         id: tag
         run: echo "::set-output name=release_tag::AOSPA_KSU_GKI_$(date +"%Y.%m.%d")"
