@@ -15,14 +15,21 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl git ccache pngcrush schedtool maven lib32ncurses5-dev xsltproc libxml2-utils squashfs-tools lzop flex build-essential bc libssl-dev libswitch-perl libxml-simple-perl zip unzip g++-multilib bison gperf zlib1g-dev automake
+          sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
+          sudo chmod a+rx /usr/local/bin/repo
       - name: "Clone repo, and sync"
-        run: repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1 && repo sync && cd kernel_platform && mkdir -p device/xiaomi/marble-kernel
+        run: |
+          repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1
+          repo sync
+          mkdir -p kernel_platform/device/xiaomi/marble-kernel
       #- name: "Include KSU"
-      #  run: curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -      
+      #  run: cd kernel_platform/xiaomi/sm8450 && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -      
       - name: "Build kernel"
-        run: cd kernel_platform/xiaomi/sm8450 && ./build.sh marble
+        run: |
+          cd kernel_platform/xiaomi/sm8450
+          ./build.sh marble
       - name: "Zip output"
-        run: cd kernel_platform/device/xiaomi/marble-kernel && zip -r9 "../marble-kernel.zip" *
+        run: zip -r9 "marble-kernel.zip" kernel_platform/device/xiaomi/marble-kernel/*
       - name: Generate release tag
         id: tag
         run: echo "::set-output name=release_tag::AOSPA_KSU_GKI_$(date +"%Y.%m.%d")"
@@ -30,6 +37,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/kernel_manifest/device/xiaomi/marble-kernel.zip
+          files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/marble-kernel.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
