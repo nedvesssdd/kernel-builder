@@ -8,7 +8,7 @@ jobs:
       - name: "Setup build environment"
         run: curl https://raw.githubusercontent.com/akhilnarang/scripts/master/setup/android_build_env.sh | bash -
       - name: "Clone repo, sync, and build"
-        run: repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1 && repo sync && cd common && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash - && cd ../ && ./build.sh -t -c && mv aospa-gki-marble-*.zip aospa-gki-kernel-ksu.zip
+        run: repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1 && repo sync && cd common && curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash - && cd ../ && ./build.sh -t -c
       - name: Generate release tag
         id: tag
         run: echo "::set-output name=release_tag::AOSPA_KSU_GKI_$(date +"%Y.%m.%d")"
@@ -16,6 +16,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
-          files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/aospa-gki-kernel-ksu.zip
+          files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/out/uvite-xiaomi-sm8450/dist/Image
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
