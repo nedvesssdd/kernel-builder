@@ -32,10 +32,16 @@ jobs:
           ./build.sh marble
       - name: "Zip output"
         run: |
+          HOME="$(pwd)"
           cd kernel_platform/device/xiaomi/marble-kernel
-          zip -r9 "../../../../marble-kernel.zip" *
+          zip -r9 "${HOME}/marble-kernel-blobs.zip" *
+          cp Image $HOME/AnyKernel3
+          cd $HOME/AnyKernel3
+          zip -r9 "../marble-kernel.zip" * -x .git README.md *placeholder
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: "AOSPA_KSU_GKI_$(date +'%Y.%m.%d')"
-          files: /home/runner/work/aospa-gki-kernel-build/aospa-gki-kernel-build/marble-kernel.zip
+          files: |
+            marble-kernel.zip
+            marble-kernel-blobs.zip
