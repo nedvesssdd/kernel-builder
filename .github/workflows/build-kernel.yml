@@ -35,7 +35,7 @@ jobs:
           cd ..
           patch -p1 < 50_add_susfs_in_gki-android12-5.10.patch
           cd $HOME/susfs4ksu
-          ./build_ksu_susfs_tool.sh
+          ./build_ksu_module.sh
           mv ksu_module_susfs.zip ..
       - name: "Build kernel"
         run: |
