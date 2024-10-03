@@ -22,7 +22,6 @@ jobs:
           repo init -u https://github.com/bryanyee33/kernel_manifest -b uvite-xiaomi-sm8450 --depth=1
           repo sync
           mkdir -p kernel_platform/device/xiaomi/marble-kernel/dtbs
-          mkdir -p .ccache
           ccache -M 10
       - name: Include KSU
         run: |
@@ -44,6 +43,7 @@ jobs:
         with:
           path: |
             ${{ github.workspace }}/.ccache
+            ${{ github.workspace }}/kernel_platform/xiaomi/sm8450/out
           key: aospa-marble
       - name: Build kernel
         run: |
