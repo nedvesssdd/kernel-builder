@@ -24,7 +24,7 @@ jobs:
           mkdir -p kernel_platform/device/xiaomi/marble-kernel/dtbs
           mkdir -p .ccache
           ccache -M 10
-          ccache -o sloppiness=time_macros
+          ccache -o sloppiness=time_macros -o cache_dir="$(pwd)/.ccache"
       - name: Include KSU
         run: |
           cd kernel_platform/xiaomi/sm8450
