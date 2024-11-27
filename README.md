@@ -4,6 +4,9 @@
 - Added SUS-FS
 - Added Westwood TCP (set as default)
 
+### Note
+To use SUS-FS, you will have to manually modify the provided module to fit your requirements.
+
 <p>&nbsp;</p>
 
 Credits to Adithya R - [ghostrider_reborn](https://github.com/ghostrider-reborn)
