@@ -5,7 +5,8 @@
 - Added Westwood TCP (set as default)
 
 ### Note
-To use SUS-FS, you will have to manually modify the provided module to fit your requirements.
+- To use SUS-FS, you will have to manually modify the provided module to fit your requirements.
+- You may use [this](https://github.com/sidex15/ksu_module_susfs) module instead if you are unsure of what to modify.
 
 <p>&nbsp;</p>
 
