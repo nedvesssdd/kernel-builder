@@ -1,13 +1,13 @@
 # aospa-gki-kernel-build
 ## Differences from stock AOSPA kernel
-- Added KSU
+- Added KSU (GKI)
 - Added SUS-FS
 - Added Westwood TCP (set as default)
 - Allow for usage of Magic Mount
 
 ### SUS-FS Usage
 - To use SUS-FS, you will have to manually modify the provided module to fit your requirements.
-- You may use [this](https://github.com/sidex15/ksu_module_susfs) module instead if you are unsure of what to modify.
+- You may use [this](https://github.com/sidex15/ksu_module_susfs) module instead if you are unsure of what to modify. Use the v1.5.2 releases.
 
 ### Magic Mount
 - To switch to Magic Mount, install the KernelSU apk with Magic Mount from [here](https://github.com/armv7a/KernelSU/releases). To switch back, install the official KernelSU apk.
