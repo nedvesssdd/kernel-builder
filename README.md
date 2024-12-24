@@ -3,10 +3,15 @@
 - Added KSU
 - Added SUS-FS
 - Added Westwood TCP (set as default)
+- Allow for usage of Magic Mount
 
-### Note
+### SUS-FS Usage
 - To use SUS-FS, you will have to manually modify the provided module to fit your requirements.
 - You may use [this](https://github.com/sidex15/ksu_module_susfs) module instead if you are unsure of what to modify.
+
+### Magic Mount
+- To switch to Magic Mount, install the KernelSU apk with Magic Mount from [here](https://github.com/armv7a/KernelSU/releases). To switch back, install the official KernelSU apk.
+- You will have to delete /data/adb/modules, /data/adb/modules_update, /data/adb/ksu/modules.img, /data/adb/ksu/modules_update.img to switch between them.
 
 <p>&nbsp;</p>
 
