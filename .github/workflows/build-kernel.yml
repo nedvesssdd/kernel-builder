@@ -47,6 +47,7 @@ jobs:
       - name: Build kernel
         run: |
           cd kernel_platform/xiaomi/sm8450
+          sed -i '/#include <linux\/uaccess.h>/a\#include <linux/susfs_def.h>\' fs/namei.c
           ./build.sh marble
       - name: Zip output
         run: |
