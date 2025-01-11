@@ -48,6 +48,7 @@ jobs:
         run: |
           cd kernel_platform/xiaomi/sm8450
           sed -i '/#include <linux\/uaccess.h>/a\#include <linux/susfs_def.h>\' fs/namei.c
+          sed -i 's/# CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS is not set/CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS=y/' arch/arm64/configs/vendor/personal.config
           ./build.sh marble
       - name: Zip output
         run: |
