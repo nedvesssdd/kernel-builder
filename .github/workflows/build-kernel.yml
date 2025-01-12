@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   build-ksu:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Set Swap Space
         uses: pierotofy/set-swap-space@master
@@ -14,7 +14,7 @@ jobs:
       - name: Setup build environment
         run: |
           sudo apt-get update
-          sudo apt-get install -y curl git ccache pngcrush schedtool maven xsltproc libxml2-utils squashfs-tools lzop flex build-essential bc libssl-dev libswitch-perl libxml-simple-perl zip unzip g++-multilib bison gperf zlib1g-dev automake device-tree-compiler
+          sudo apt-get install -y curl git ccache pngcrush schedtool maven lib32ncurses5-dev xsltproc libxml2-utils squashfs-tools lzop flex build-essential bc libssl-dev libswitch-perl libxml-simple-perl zip unzip g++-multilib bison gperf zlib1g-dev automake device-tree-compiler
           sudo curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapis.com/git-repo-downloads/repo
           sudo chmod a+rx /usr/local/bin/repo
       - name: Clone repo and sync
@@ -47,8 +47,7 @@ jobs:
       - name: Build kernel
         run: |
           cd kernel_platform/xiaomi/sm8450
-          sed -i '/#include <linux\/uaccess.h>/a\#include <linux/susfs_def.h>\' fs/namei.c
-          sed -i 's/# CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS is not set/CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS=y/' arch/arm64/configs/vendor/personal.config
+          sed -i 's/CONFIG_KSU_SUSFS_SPOOF_BOOTCONFIG/CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG/' arch/arm64/configs/vendor/personal.config
           ./build.sh marble
       - name: Zip output
         run: |
