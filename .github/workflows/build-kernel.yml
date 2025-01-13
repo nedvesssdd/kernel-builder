@@ -47,6 +47,7 @@ jobs:
       - name: Build kernel
         run: |
           cd kernel_platform/xiaomi/sm8450
+          echo 'CONFIG_TMPFS_XATTR=y' >> arch/arm64/configs/vendor/personal.config
           ./build.sh marble
       - name: Zip output
         run: |
