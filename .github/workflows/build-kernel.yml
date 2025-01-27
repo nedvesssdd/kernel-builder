@@ -50,12 +50,12 @@ jobs:
           ./build.sh marble
       - name: Zip output
         run: |
-          HOME="$(pwd)"
-          cd kernel_platform/device/xiaomi/marble-kernel
-          zip -r9 "${HOME}/blobs.zip" *
-          cp Image $HOME/AnyKernel3
-          cd $HOME/AnyKernel3
-          zip -r9 "../marble-kernel.zip" * -x .git README.md *placeholder
+          cp kernel_platform/device/xiaomi/marble-kernel/Image AnyKernel3
+          cd AnyKernel3
+          rm -r .git README.md
+          find . -type f -name 'placeholder' -delete
+          find . -type d -empty -delete
+          zip -r9 "../marble-kernel.zip" *
       - name: Generate release tag
         id: tag
         run: echo "release_tag=AOSPA_KSU_GKI_$(date +'%Y.%m.%d')" >> "$GITHUB_OUTPUT"
@@ -66,4 +66,13 @@ jobs:
           files: |
             marble-kernel.zip
             ksu_module_susfs.zip
-          # blobs.zip
+      - name: Upload marble-kernel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: marble-kernel
+          path: AnyKernel3/*
+      - name: Upload blobs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blobs
+          path: kernel_platform/device/xiaomi/marble-kernel/*
