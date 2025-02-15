@@ -43,7 +43,7 @@ fi
 
 if ! source .build.rc || [ -z "$SRC_ROOT" ]; then
     echo -e "Create a .build.rc file here and define\nSRC_ROOT=<path/to/aospa/source>"
-    exit 1
+    SRC_ROOT="$(realpath ../..)"
 fi
 
 KERNEL_DIR="$SRC_ROOT/device/xiaomi/$TARGET-kernel"
