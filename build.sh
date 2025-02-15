@@ -149,7 +149,7 @@ no_ksu_lkm
 echo -e "\nBuilding techpack modules..."
 for module in $MODULES; do
     echo -e "\nBuilding $module..."
-    #m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out"
+    m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out"
     m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out" \
         INSTALL_MOD_PATH=modules INSTALL_MOD_STRIP=1 modules_install
 done
@@ -159,7 +159,10 @@ echo -e "\nKernel compiled succesfully!\nMerging dtb's...\n"
 rm -rf out/dtbs{,-base}
 mkdir out/dtbs{,-base}
 echo "HERE"
-ls out/arch/arm64/boot/dts/vendor/qcom
+CURR_DIR="$(pwd)"
+cd out/arch/arm64/boot/dts/vendor/qcom
+find .
+cd "$CURR_DIR"
 echo "\HERE"
 
 mv  out/arch/arm64/boot/dts/vendor/qcom/$DTB_WILDCARD.dtb \
