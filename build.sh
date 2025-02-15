@@ -3,6 +3,8 @@
 # Compile script for Xiaomi 8450 kernel, dts and modules with AOSPA
 # Copyright (C) 2024 Adithya R.
 
+set -x
+
 SECONDS=0 # start builtin bash timer
 KP_ROOT="$(realpath ../..)"
 SRC_ROOT="$HOME/pa"
