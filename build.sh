@@ -131,7 +131,7 @@ $NO_LTO && (
 $ONLY_CONFIG && exit
 
 echo -e "\nBuilding kernel...\n"
-m Image modules dtbs
+m modules dtbs
 rm -rf out/modules out/*.ko
 m INSTALL_MOD_PATH=modules INSTALL_MOD_STRIP=1 modules_install
 
@@ -149,7 +149,7 @@ no_ksu_lkm
 echo -e "\nBuilding techpack modules..."
 for module in $MODULES; do
     echo -e "\nBuilding $module..."
-    m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out modules"
+    #m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out"
     m -C $MODULES_SRC/$module M=$MODULES_SRC/$module KERNEL_SRC="$(pwd)" OUT_DIR="$(pwd)/out" \
         INSTALL_MOD_PATH=modules INSTALL_MOD_STRIP=1 modules_install
 done
