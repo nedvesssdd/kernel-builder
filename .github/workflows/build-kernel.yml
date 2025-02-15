@@ -51,6 +51,7 @@ jobs:
         run: |
           cp aospa-gki-kernel-build/build.sh kernel_platform/xiaomi/sm8450
           cd kernel_platform/xiaomi/sm8450
+          chmod +x build.sh
           ./build.sh marble
       - name: Zip output
         run: |
