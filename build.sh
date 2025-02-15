@@ -161,7 +161,7 @@ mkdir out/dtbs{,-base}
 echo "HERE"
 CURR_DIR="$(pwd)"
 cd out/arch/arm64/boot/dts/vendor/qcom
-find .
+find . -type f
 cd "$CURR_DIR"
 echo "\HERE"
 
