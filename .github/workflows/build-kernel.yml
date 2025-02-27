@@ -19,14 +19,14 @@ jobs:
           sudo chmod a+rx /usr/local/bin/repo
       - name: Clone repo and sync
         run: |
-          repo init -u https://github.com/ChiseWaguri/kernel_manifest -b losksu --depth=1
+          repo init -u https://github.com/nedvesssdd/kernel_manifest -b main --depth=1
           repo sync
           mkdir -p kernel_platform/device/xiaomi/marble-kernel/dtbs
       - name: Include KSU
         run: |
           cd kernel_platform/xiaomi/sm8450
           [[ -d KernelSU ]] && rmdir KernelSU
-          curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s susfs-v1.5.5
+          curl -LSs "https://raw.githubusercontent.com/pavelc4/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash 
       - name: Include SUSFS
         run: |
           HOME="$(pwd)"
@@ -63,7 +63,7 @@ jobs:
           zip -r9 "../marble-kernel.zip" *
       - name: Generate release tag
         id: tag
-        run: echo "release_tag=AOSPA_KSU_GKI_$(date +'%Y.%m.%d')" >> "$GITHUB_OUTPUT"
+        run: echo "release_tag=los_KSU_GKI_$(date +'%Y.%m.%d')" >> "$GITHUB_OUTPUT"
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
