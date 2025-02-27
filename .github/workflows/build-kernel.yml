@@ -40,9 +40,9 @@ jobs:
           mv ksu_module_susfs.zip ..
       - name: Include other KSU manager signatures
         run: |
-          sed -i '/return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) ||/a\
-              check_v2_signature(path, 0x3e6, "79e590113c4c4c0c222978e413a5faa801666957b1212a328e46c00c69821bf7") /*KernelSU-Next*/ || \
-              \' kernel_platform/xiaomi/sm8450/KernelSU/kernel/apk_sign.c
+          # sed -i '/return (check_v2_signature(path, EXPECTED_SIZE, EXPECTED_HASH) ||/a\
+          #     check_v2_signature(path, 0x3e6, "79e590113c4c4c0c222978e413a5faa801666957b1212a328e46c00c69821bf7") /*KernelSU-Next*/ || \
+          #     \' kernel_platform/xiaomi/sm8450/KernelSU/kernel/apk_sign.c
       - uses: actions/checkout@v4
         with:
           path: aospa-gki-kernel-build
